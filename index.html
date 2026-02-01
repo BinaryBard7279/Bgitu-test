@@ -13,6 +13,182 @@
     <link rel="stylesheet" href="css/locomotive-scroll.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="css/index.min.css">
+    <style>
+        /* Color Palette */
+        :root {
+            --primary: #0072F5;
+            --secondary: #86868B;
+            --black: #161617;
+            --light: #f4f4f4;
+        }
+
+        /* Card Styles */
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* Colored Placeholder Squares */
+        .placeholder-square {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .placeholder-1 { background: linear-gradient(135deg, #0072F5 0%, #0052CC 100%); }
+        .placeholder-2 { background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%); }
+        .placeholder-3 { background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%); }
+        .placeholder-4 { background: linear-gradient(135deg, #F7B731 0%, #F5A623 100%); }
+        .placeholder-5 { background: linear-gradient(135deg, #A29BFE 0%, #6C5CE7 100%); }
+        .placeholder-6 { background: linear-gradient(135deg, #F368E0 0%, #D946EF 100%); }
+        .placeholder-7 { background: linear-gradient(135deg, #00B894 0%, #00A067 100%); }
+        .placeholder-8 { background: linear-gradient(135deg, #FF7675 0%, #D63031 100%); }
+
+        /* Track/Plan Grid */
+        .track-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .track-card {
+            background: linear-gradient(135deg, var(--primary), #0052CC);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .track-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .track-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Specializations List */
+        .specializations-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .specialization-item {
+            padding: 24px;
+            background: #f9f9f9;
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+        }
+
+        .specialization-item h3 {
+            color: var(--black);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .specialization-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .specialization-item li {
+            font-size: 13px;
+            color: var(--secondary);
+            padding: 6px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .specialization-item li:last-child {
+            border-bottom: none;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 1/1;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Schedule/Plan Placeholder */
+        .schedule-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 16px;
+            margin-top: 32px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        /* Section spacing */
+        .section-spacing {
+            margin-top: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 24px;
+            }
+            
+            .track-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Preloader -->
@@ -47,6 +223,7 @@
                 <div class="sidebar-body">
                     <ul class="sidebar-list">
                         <li><a data-scroll-to href="#np">Направления подготовки</a></li>
+                        <li><a data-scroll-to href="#spec">Специализации</a></li>
                         <li><a data-scroll-to href="#block">Базовый блок дисциплин</a></li>
                         <li><a data-scroll-to href="#feature">Фичи направлений</a></li>
                         <li><a data-scroll-to href="#track">Карьерный трек</a></li>
@@ -137,27 +314,27 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/sport_progr/Sport_progr_1.jpg" alt="Спортивное программирование - участники 1">
+                                <div class="placeholder-square placeholder-1">Фото 1</div>
                             </div>
                         </div>
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/sport_progr/Sport_progr_2.jpg" alt="Спортивное программирование - участники 2">
+                                <div class="placeholder-square placeholder-2">Фото 2</div>
                             </div>
                         </div>
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/sport_progr/Sport_progr_3.jpg" alt="Спортивное программирование - участники 3">
+                                <div class="placeholder-square placeholder-3">Фото 3</div>
                             </div>
                         </div>
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/sport_progr/Sport_progr_4.jpg" alt="Спортивное программирование - участники 4">
+                                <div class="placeholder-square placeholder-4">Фото 4</div>
                             </div>
                         </div>
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/sport_progr/Sport_progr_5.jpg" alt="Спортивное программирование - участники 5">
+                                <div class="placeholder-square placeholder-5">Фото 5</div>
                             </div>
                         </div>
                     </div>
@@ -203,22 +380,22 @@
                     <div class="swiper-wrapper">
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/student_it/Student_it_1.jpg" alt="Студенты IT - проект 1">
+                                <div class="placeholder-square placeholder-6">Студент 1</div>
                             </div>
                         </div>
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/student_it/Student_it_2.jpg" alt="Студенты IT - проект 2">
+                                <div class="placeholder-square placeholder-7">Студент 2</div>
                             </div>
                         </div>
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/student_it/Student_it_3.jpg" alt="Студенты IT - проект 3">
+                                <div class="placeholder-square placeholder-8">Студент 3</div>
                             </div>
                         </div>
                         <div class="swiper-slide event-slider-slide">
                             <div class="Image event-slider-item">
-                                <img src="img/student_it/Student_it_4.jpg" alt="Студенты IT - проект 4">
+                                <div class="placeholder-square placeholder-1">Студент 4</div>
                             </div>
                         </div>
                     </div>
@@ -236,7 +413,7 @@
                                 <div class="Avatar">
                                     <div class="d-flex align-items-center">
                                         <div class="Avatar-user">
-                                            <img src="img/sport_progr/team-3.jpg" alt="Никита Шидловский">
+                                            <div class="placeholder-square placeholder-3" style="width: 42px; height: 42px; margin: 0;">NK</div>
                                         </div>
                                         <div class="d-flex flex-column ms-2">
                                             <a target="_blank" href="https://vk.com/nlk81" class="Text">Никита Шидловский</a>
@@ -264,27 +441,82 @@
                         <div class="row gy-4">
                             <div class="col-md-4">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="card-title">09.03.01 Информатика и вычислительная техника</h3>
-                                        <p class="card-text">Бакалавриат по направлению разработки программных и аппаратных систем.</p>
-                                    </div>
+                                    <div class="placeholder-square placeholder-1" style="margin-top: -32px; margin-left: -32px; margin-right: -32px; margin-bottom: 16px; border-radius: 12px 12px 0 0;">09.03.01</div>
+                                    <h3 class="card-title">Информатика и вычислительная техника</h3>
+                                    <p class="card-text">Бакалавриат по направлению разработки программных и аппаратных систем.</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="card-title">09.03.02 Информационные системы и технологии</h3>
-                                        <p class="card-text">Подготовка специалистов по проектированию и внедрению информационных систем.</p>
-                                    </div>
+                                    <div class="placeholder-square placeholder-2" style="margin-top: -32px; margin-left: -32px; margin-right: -32px; margin-bottom: 16px; border-radius: 12px 12px 0 0;">09.03.02</div>
+                                    <h3 class="card-title">Информационные системы и технологии</h3>
+                                    <p class="card-text">Подготовка специалистов по проектированию и внедрению информационных систем.</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="card-title">09.04.01 Информатика и вычислительная техника (магистратура)</h3>
-                                        <p class="card-text">Углублённая подготовка в области современных IT-технологий и исследований.</p>
-                                    </div>
+                                    <div class="placeholder-square placeholder-3" style="margin-top: -32px; margin-left: -32px; margin-right: -32px; margin-bottom: 16px; border-radius: 12px 12px 0 0;">09.04.01</div>
+                                    <h3 class="card-title">Информатика и ВТ (магистратура)</h3>
+                                    <p class="card-text">Углублённая подготовка в области современных IT-технологий и исследований.</p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specializations Section -->
+        <section data-scroll-section class="section" id="spec">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-md-12">
+                        <h2 class="Subhead text-bold">Специализации и треки</h2>
+                        <p class="Subtitle" style="margin-top: 16px; color: var(--secondary);">
+                            Выберите направление, которое интересует вас больше всего. БГИТУ предлагает современные треки обучения:
+                        </p>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="specializations-list">
+                            <div class="specialization-item">
+                                <h3>☑ Кибербезопасность</h3>
+                                <ul>
+                                    <li>Защита информации</li>
+                                    <li>Криптография</li>
+                                    <li>Анализ уязвимостей</li>
+                                </ul>
+                            </div>
+                            <div class="specialization-item">
+                                <h3>☑ Искусственный интеллект</h3>
+                                <ul>
+                                    <li>Машинное обучение</li>
+                                    <li>Нейронные сети</li>
+                                    <li>Обработка данных</li>
+                                </ul>
+                            </div>
+                            <div class="specialization-item">
+                                <h3>☑ Робототехника</h3>
+                                <ul>
+                                    <li>Автоматизированное проектирование</li>
+                                    <li>Роботные системы</li>
+                                    <li>Управление процессами</li>
+                                </ul>
+                            </div>
+                            <div class="specialization-item">
+                                <h3>☑ Информационные системы</h3>
+                                <ul>
+                                    <li>Системный анализ</li>
+                                    <li>Базы данных</li>
+                                    <li>ERP системы</li>
+                                </ul>
+                            </div>
+                            <div class="specialization-item">
+                                <h3>☑ Программная инженерия</h3>
+                                <ul>
+                                    <li>Разработка ПО</li>
+                                    <li>Тестирование</li>
+                                    <li>DevOps</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -303,34 +535,34 @@
                         <div class="row gy-3">
                             <div class="col-md-3">
                                 <h3 class="Subtitle">Программирование</h3>
-                                <ul>
-                                    <li>Алгоритмы и структуры данных</li>
-                                    <li>Объектно-ориентированное программирование</li>
-                                    <li>Разработка web-приложений</li>
+                                <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Алгоритмы и структуры данных</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ ООП</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Web-приложения</li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
                                 <h3 class="Subtitle">Математика</h3>
-                                <ul>
-                                    <li>Высшая математика</li>
-                                    <li>Дискретная математика</li>
-                                    <li>Теория вероятностей и статистика</li>
+                                <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Высшая математика</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Дискретная математика</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Теория вероятностей</li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
                                 <h3 class="Subtitle">Системы</h3>
-                                <ul>
-                                    <li>Операционные системы</li>
-                                    <li>Компьютерные сети</li>
-                                    <li>Базы данных</li>
+                                <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ ОС</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Компьютерные сети</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Базы данных</li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
-                                <h3 class="Subtitle">Проектная деятельность</h3>
-                                <ul>
-                                    <li>Командная разработка</li>
-                                    <li>Проектный практикум</li>
-                                    <li>Научно-исследовательская работа</li>
+                                <h3 class="Subtitle">Проекты</h3>
+                                <ul style="list-style: none; padding: 0; margin-top: 12px;">
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Командная разработка</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Практикум</li>
+                                    <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">✓ Исследования</li>
                                 </ul>
                             </div>
                         </div>
@@ -349,16 +581,22 @@
                     <div class="col-md-12">
                         <div class="row gy-3">
                             <div class="col-md-4">
-                                <h3 class="Subtitle">Практико-ориентированное обучение</h3>
-                                <p>Большая часть дисциплин ориентирована на практику и реальные проекты.</p>
+                                <div style="padding: 32px; background: linear-gradient(135deg, rgba(0, 114, 245, 0.1), rgba(0, 82, 204, 0.1)); border-radius: 12px; border-left: 4px solid var(--primary);">
+                                    <h3 class="Subtitle">📚 Практико-ориентированное</h3>
+                                    <p style="margin-top: 12px; font-size: 14px; color: var(--secondary); line-height: 1.6;">Большая часть дисциплин ориентирована на практику и реальные проекты.</p>
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <h3 class="Subtitle">Современные технологии</h3>
-                                <p>Изучение актуальных стеков технологий: web, мобильная разработка, DevOps, AI.</p>
+                                <div style="padding: 32px; background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 82, 82, 0.1)); border-radius: 12px; border-left: 4px solid #FF6B6B;">
+                                    <h3 class="Subtitle">🚀 Современные технологии</h3>
+                                    <p style="margin-top: 12px; font-size: 14px; color: var(--secondary); line-height: 1.6;">Изучение актуальных стеков: web, мобильная разработка, DevOps, AI.</p>
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <h3 class="Subtitle">Партнёрство с IT-компаниями</h3>
-                                <p>Стажировки, практики и участие в проектах совместно с IT-компаниями региона.</p>
+                                <div style="padding: 32px; background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(68, 160, 141, 0.1)); border-radius: 12px; border-left: 4px solid #4ECDC4;">
+                                    <h3 class="Subtitle">🤝 Партнёрство с IT</h3>
+                                    <p style="margin-top: 12px; font-size: 14px; color: var(--secondary); line-height: 1.6;">Стажировки и участие в проектах совместно с IT-компаниями региона.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -372,24 +610,25 @@
                 <div class="row gy-4">
                     <div class="col-md-12">
                         <h2 class="Subhead text-bold">Карьерный трек</h2>
+                        <p class="Subtitle" style="margin-top: 16px; color: var(--secondary);">От первого курса до успешного трудоустройства</p>
                     </div>
                     <div class="col-md-12">
-                        <div class="row gy-3">
-                            <div class="col-md-3">
-                                <h3 class="Subtitle">1-2 курс</h3>
-                                <p>Освоение базовых дисциплин, участие в хакатонах и студенческих проектах.</p>
+                        <div class="track-grid">
+                            <div class="track-card">
+                                <h3>1–2 курс</h3>
+                                <p>Базовые дисциплины, хакатоны, студпроекты</p>
                             </div>
-                            <div class="col-md-3">
-                                <h3 class="Subtitle">3-4 курс</h3>
-                                <p>Проектная деятельность, стажировки, участие в конкурсах и конференциях.</p>
+                            <div class="track-card" style="background: linear-gradient(135deg, #FF6B6B, #FF5252);">
+                                <h3>3–4 курс</h3>
+                                <p>Проекты, стажировки, конкурсы и конференции</p>
                             </div>
-                            <div class="col-md-3">
-                                <h3 class="Subtitle">Магистратура</h3>
-                                <p>Научно-исследовательская работа, участие в грантах, углубление компетенций.</p>
+                            <div class="track-card" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                                <h3>Магистратура</h3>
+                                <p>Исследования, гранты, углубленные компетенции</p>
                             </div>
-                            <div class="col-md-3">
-                                <h3 class="Subtitle">Трудоустройство</h3>
-                                <p>Работа в IT-компаниях региона, участие в стартапах, карьерный рост.</p>
+                            <div class="track-card" style="background: linear-gradient(135deg, #F7B731, #F5A623);">
+                                <h3>Трудоустройство</h3>
+                                <p>Работа в IT-компаниях, стартапы, карьера</p>
                             </div>
                         </div>
                     </div>
@@ -403,15 +642,15 @@
                 <div class="row gy-4">
                     <div class="col-md-12">
                         <h2 class="Subhead text-bold">Учебный план</h2>
+                        <p class="Subtitle" style="margin-top: 16px; color: var(--secondary);">Учебный план формируется при непосредственном участии представителей IT-компаний, что позволяет адаптировать содержание обучения под реальные требования индустрии.</p>
                     </div>
                     <div class="col-md-12">
-                        <p class="Subtitle">
-                            Учебный план формируется при непосредственном участии представителей IT-компаний, что позволяет
-                            адаптировать содержание обучения под реальные требования индустрии.
-                        </p>
-                        <p class="Text">
-                            Регулярно проводятся встречи, круглые столы и совместные мероприятия с работодателями.
-                        </p>
+                        <div class="schedule-placeholder">
+                            <div>
+                                <h3 style="color: var(--black); font-weight: 600; margin-bottom: 12px;">📊 Интерактивный учебный план</h3>
+                                <p>Полная таблица дисциплин по семестрам и трекам</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -425,18 +664,27 @@
                         <h2 class="Subhead text-bold">Представители IT-индустрии</h2>
                     </div>
                     <div class="col-md-12">
-                        <div class="row gy-3">
+                        <div class="row gy-4">
                             <div class="col-md-4">
-                                <h3 class="Subtitle">Партнёры</h3>
-                                <p>Крупные IT-компании региона и России участвуют в подготовке студентов.</p>
+                                <div class="card">
+                                    <div class="placeholder-square placeholder-1" style="margin: -32px -32px 16px -32px; border-radius: 12px 12px 0 0;">Партнёры</div>
+                                    <h3 class="card-title">Партнёры</h3>
+                                    <p class="card-text">Крупные IT-компании региона и России участвуют в подготовке студентов.</p>
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <h3 class="Subtitle">Эксперты</h3>
-                                <p>Практикующие специалисты проводят мастер-классы и лекции.</p>
+                                <div class="card">
+                                    <div class="placeholder-square placeholder-2" style="margin: -32px -32px 16px -32px; border-radius: 12px 12px 0 0;">Эксперты</div>
+                                    <h3 class="card-title">Эксперты</h3>
+                                    <p class="card-text">Практикующие специалисты проводят мастер-классы и лекции.</p>
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <h3 class="Subtitle">Наставники</h3>
-                                <p>Наставники из индустрии помогают студентам в реализации проектов и выборе траектории.</p>
+                                <div class="card">
+                                    <div class="placeholder-square placeholder-3" style="margin: -32px -32px 16px -32px; border-radius: 12px 12px 0 0;">Наставники</div>
+                                    <h3 class="card-title">Наставники</h3>
+                                    <p class="card-text">Помогают в реализации проектов и выборе траектории карьеры.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -449,11 +697,22 @@
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-md-12">
-                        <h2 class="Subhead text-bold">Кафедра ИТ</h2>
+                        <h2 class="Subhead text-bold">Кафедра информационных технологий</h2>
                     </div>
-                    <div class="col-md-12">
-                        <p class="Subtitle">Кафедра информационных технологий БГИТУ объединяет ведущих преподавателей и исследователей в области IT.</p>
-                        <p class="Text">Кафедра обеспечивает высокий уровень подготовки, ведёт научно-исследовательскую деятельность и развивает международные связи.</p>
+                    <div class="col-md-6">
+                        <h3 class="Subtitle" style="margin-bottom: 16px;">О кафедре</h3>
+                        <p style="font-size: 14px; color: var(--secondary); line-height: 1.8; margin-bottom: 16px;">
+                            Кафедра информационных технологий БГИТУ объединяет ведущих преподавателей и исследователей в области IT. Мы обеспечиваем высокий уровень подготовки, ведём научно-исследовательскую деятельность и развиваем международные связи.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="Subtitle" style="margin-bottom: 16px;">Деятельность</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">🎓 Образовательные программы</li>
+                            <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">🔬 Научные исследования</li>
+                            <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">🌍 Международное сотрудничество</li>
+                            <li style="padding: 8px 0; font-size: 14px; color: var(--secondary);">🤝 Связь с индустрией</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -465,15 +724,35 @@
                 <div class="row gy-4">
                     <div class="col-md-12">
                         <h2 class="Subhead text-bold">Стипендии в БГИТУ</h2>
+                        <p class="Subtitle" style="margin-top: 16px; color: var(--secondary);">Студенты IT-направлений могут рассчитывать на различные виды стипендиальной поддержки:</p>
                     </div>
                     <div class="col-md-12">
-                        <p class="Subtitle">Студенты IT-направлений могут рассчитывать на различные виды стипендиальной поддержки.</p>
-                        <ul>
-                            <li>Академическая стипендия</li>
-                            <li>Повышенная стипендия за успехи в учёбе и науке</li>
-                            <li>Социальная стипендия</li>
-                            <li>Именные стипендии и гранты</li>
-                        </ul>
+                        <div class="row gy-3">
+                            <div class="col-md-6">
+                                <div style="padding: 20px; background: linear-gradient(135deg, rgba(0, 114, 245, 0.08), rgba(0, 82, 204, 0.08)); border-radius: 12px; border-left: 4px solid var(--primary);">
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0;">✓ Академическая стипендия</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 8px 0 0 0;">Выплачивается при хорошей успеваемости</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="padding: 20px; background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(255, 82, 82, 0.08)); border-radius: 12px; border-left: 4px solid #FF6B6B;">
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0;">✓ Повышенная стипендия</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 8px 0 0 0;">За достижения в учёбе и науке</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="padding: 20px; background: linear-gradient(135deg, rgba(78, 205, 196, 0.08), rgba(68, 160, 141, 0.08)); border-radius: 12px; border-left: 4px solid #4ECDC4;">
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0;">✓ Социальная стипендия</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 8px 0 0 0;">Для студентов с особыми обстоятельствами</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="padding: 20px; background: linear-gradient(135deg, rgba(247, 183, 49, 0.08), rgba(245, 166, 35, 0.08)); border-radius: 12px; border-left: 4px solid #F7B731;">
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0;">✓ Имённые стипендии и гранты</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 8px 0 0 0;">От организаций и спонсоров</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -485,15 +764,39 @@
                 <div class="row gy-4">
                     <div class="col-md-12">
                         <h2 class="Subhead text-bold">Абитуриенту</h2>
+                        <p class="Subtitle" style="margin-top: 16px; color: var(--secondary);">Если ты хочешь связать свою жизнь с IT, БГИТУ предлагает широкий спектр возможностей:</p>
                     </div>
                     <div class="col-md-12">
-                        <p class="Subtitle">Если ты хочешь связать свою жизнь с IT, БГИТУ предлагает широкий спектр возможностей.</p>
-                        <ul>
-                            <li>Участие в днях открытых дверей</li>
-                            <li>Консультации по направлениям подготовки</li>
-                            <li>Подготовительные курсы</li>
-                            <li>Поддержка при поступлении и адаптации</li>
-                        </ul>
+                        <div class="row gy-3">
+                            <div class="col-md-3">
+                                <div style="padding: 24px; background: #f9f9f9; border-radius: 12px; border-top: 4px solid var(--primary); text-align: center;">
+                                    <div style="font-size: 32px; margin-bottom: 12px;">🚪</div>
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0; margin-bottom: 8px;">День открытых дверей</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 0;">Посещение кампуса и знакомство с программами</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div style="padding: 24px; background: #f9f9f9; border-radius: 12px; border-top: 4px solid #FF6B6B; text-align: center;">
+                                    <div style="font-size: 32px; margin-bottom: 12px;">💬</div>
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0; margin-bottom: 8px;">Консультации</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 0;">Ответы на вопросы о направлениях подготовки</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div style="padding: 24px; background: #f9f9f9; border-radius: 12px; border-top: 4px solid #4ECDC4; text-align: center;">
+                                    <div style="font-size: 32px; margin-bottom: 12px;">📚</div>
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0; margin-bottom: 8px;">Подготовительные курсы</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 0;">Курсы для успешного прохождения вступительных испытаний</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div style="padding: 24px; background: #f9f9f9; border-radius: 12px; border-top: 4px solid #F7B731; text-align: center;">
+                                    <div style="font-size: 32px; margin-bottom: 12px;">🤝</div>
+                                    <h3 style="font-size: 16px; font-weight: 600; color: var(--black); margin: 0; margin-bottom: 8px;">Поддержка при поступлении</h3>
+                                    <p style="font-size: 13px; color: var(--secondary); margin: 0;">Помощь в адаптации и выборе дисциплин</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -507,25 +810,45 @@
                         <h2 class="Subhead text-bold">Фотогаллерея</h2>
                     </div>
                     <div class="col-md-12">
-                        <div class="row gy-3">
-                            <div class="col-md-3">
-                                <a data-fancybox="gallery" href="img/gallery/photo1.jpg">
-                                    <img src="img/gallery/photo1.jpg" alt="Фотография 1" class="img-fluid">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-1">Фото 1</div>
                                 </a>
                             </div>
-                            <div class="col-md-3">
-                                <a data-fancybox="gallery" href="img/gallery/photo2.jpg">
-                                    <img src="img/gallery/photo2.jpg" alt="Фотография 2" class="img-fluid">
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-2">Фото 2</div>
                                 </a>
                             </div>
-                            <div class="col-md-3">
-                                <a data-fancybox="gallery" href="img/gallery/photo3.jpg">
-                                    <img src="img/gallery/photo3.jpg" alt="Фотография 3" class="img-fluid">
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-3">Фото 3</div>
                                 </a>
                             </div>
-                            <div class="col-md-3">
-                                <a data-fancybox="gallery" href="img/gallery/photo4.jpg">
-                                    <img src="img/gallery/photo4.jpg" alt="Фотография 4" class="img-fluid">
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-4">Фото 4</div>
+                                </a>
+                            </div>
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-5">Фото 5</div>
+                                </a>
+                            </div>
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-6">Фото 6</div>
+                                </a>
+                            </div>
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-7">Фото 7</div>
+                                </a>
+                            </div>
+                            <div class="gallery-item">
+                                <a data-fancybox="gallery" href="#">
+                                    <div class="placeholder-square placeholder-8">Фото 8</div>
                                 </a>
                             </div>
                         </div>
